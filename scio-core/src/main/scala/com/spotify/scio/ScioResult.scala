@@ -43,9 +43,9 @@ import scala.util.{Failure, Success, Try}
 /** Represent a Scio pipeline result. */
 class ScioResult private[scio] (val internal: PipelineResult,
                                 val accumulators: Seq[Accumulator[_]],
-                                private val context: ScioContext) {
+                                val context: ScioContext) {
 
-  private val logger = LoggerFactory.getLogger(this.getClass)
+  private val logger = LoggerFactory.getLogger(classOf[ScioResult])
 
   private val aggregators: Map[String, Iterable[Aggregator[_, _]]] =
     context.pipeline.getAggregatorSteps.asScala.keys.groupBy(_.getName)
